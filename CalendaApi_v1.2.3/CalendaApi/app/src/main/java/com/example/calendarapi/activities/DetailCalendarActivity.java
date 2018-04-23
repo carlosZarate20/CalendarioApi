@@ -7,9 +7,12 @@ import android.widget.TextView;
 
 import com.example.calendarapi.R;
 
+import java.text.SimpleDateFormat;
+
 public class DetailCalendarActivity extends AppCompatActivity {
 
     TextView detail,location,evento,hora,id;
+    private SimpleDateFormat simple=new SimpleDateFormat("h:mm a");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +29,7 @@ public class DetailCalendarActivity extends AppCompatActivity {
         evento.setText(getIntent().getStringExtra("summary"));
         location.setText(getIntent().getStringExtra("location"));
         detail.setText(getIntent().getStringExtra("description"));
-
+        hora.setText(getIntent().getStringExtra("startTime"));
     }
 
     @Override

@@ -100,6 +100,7 @@ public class CalendarioActivity extends Activity implements EasyPermissions.Perm
                 intent.putExtra("summary",evento.getSummary());
                 intent.putExtra("location",evento.getLocation());
                 intent.putExtra("description",evento.getDescription());
+                intent.putExtra("startTime",evento.getStart().getDateTime().toString());
                 startActivity(intent);
             }
         });
