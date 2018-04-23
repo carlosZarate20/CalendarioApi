@@ -94,14 +94,12 @@ public class CalendarioActivity extends Activity implements EasyPermissions.Perm
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Event evento = new Event();
-                evento.get(position);
+                Event evento = adapter.getItem(position);
                 Intent intent = new Intent(getApplicationContext(), DetailCalendarActivity.class);
                 intent.putExtra("id", evento.getId());
                 intent.putExtra("summary",evento.getSummary());
                 intent.putExtra("location",evento.getLocation());
                 intent.putExtra("description",evento.getDescription());
-                intent.putExtra("hora",evento.getCreated());
                 startActivity(intent);
             }
         });

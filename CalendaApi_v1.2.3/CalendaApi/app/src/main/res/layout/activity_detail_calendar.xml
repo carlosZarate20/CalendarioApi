@@ -12,72 +12,84 @@
     style="@style/layout_background_apps"
     tools:context=".activities.DetailCalendarActivity">
 
-    <TextView
-        android:id="@+id/detalleId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"/>
-    <TextView
-        android:id="@+id/textEvent"
-        android:layout_width="134dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="32dp"
-        android:layout_marginTop="68dp"
-        android:text="Ir al Trabajo"
-        android:textColor="#FFFFFF"/>
-
-    <ImageView
-        android:layout_width="91dp"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/hora"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/ic_reloj" />
-    <TextView
-        android:id="@+id/hora"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="232dp"
-        android:layout_marginTop="121dp"
-        android:text="9:00 am"
-        android:textColor="#FFFFFF"/>
-
-    <ImageView
-        android:layout_width="91dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textLocation"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/ic_location" />
-
-    <TextView
-        android:id="@+id/textLocation"
-        android:layout_width="127dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="232dp"
-        android:layout_marginTop="191dp"
-        android:text="San Isidro"
-        android:textColor="#FFFFFF"/>
-
-    <TextView
-        android:layout_width="132dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:text="Descripcion"
-        android:textColor="#FFFFFF" />
-
-    <TextView
-        android:id="@+id/textDescripcion"
-        android:layout_width="193dp"
-        android:layout_height="wrap_content"
+    <RelativeLayout
+        android:layout_width="260dp"
+        android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="179dp"
-        android:text="Reunion con Daniel Alvarado"
-        android:textColor="#FFFFFF"/>
+        android:layout_alignParentRight="true">
+
+        <TextView
+            android:id="@+id/detalleId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/textEvent"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="54dp"
+            android:text="Ir al Trabajo"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#FFFFFF" />
+
+        <ImageView
+            android:layout_width="46dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@+id/hora"
+            android:src="@drawable/ic_reloj" />
+
+        <TextView
+            android:id="@+id/hora"
+            android:layout_width="143dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="62dp"
+            android:layout_marginTop="116dp"
+            android:text="9:00 am"
+            android:textColor="#FFFFFF" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="189dp"
+            android:src="@drawable/ic_location" />
+
+        <TextView
+            android:id="@+id/textLocation"
+            android:layout_width="213dp"
+            android:layout_height="47dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="198dp"
+            android:text="San Isidro"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:layout_width="132dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="204dp"
+            android:text="Descripcion"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/textDescripcion"
+            android:layout_width="193dp"
+            android:layout_height="126dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="56dp"
+            android:text="Reunion con Daniel Alvarado"
+            android:textColor="#FFFFFF" />
+
+    </RelativeLayout>
 
 </RelativeLayout>
