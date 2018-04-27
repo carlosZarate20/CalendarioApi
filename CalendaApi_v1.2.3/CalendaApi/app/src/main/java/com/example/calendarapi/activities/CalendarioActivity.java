@@ -45,6 +45,8 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
+import devs.mulham.horizontalcalendar.HorizontalCalendar;
+import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -79,6 +81,25 @@ public class CalendarioActivity extends Activity implements EasyPermissions.Perm
         diaSemana = (TextView) findViewById(R.id.textWeak);
         fecha = (TextView) findViewById(R.id.textFecha);
 
+
+        /* starts before 1 month from now */
+        Calendar startDate = Calendar.getInstance();
+        startDate.add(Calendar.MONTH, -1);
+
+        /* ends after 1 month from now */
+        Calendar endDate = Calendar.getInstance();
+        endDate.add(Calendar.MONTH, 1);
+
+        HorizontalCalendar horizontalCalendar = new HorizontalCalendar.Builder(this, R.id.calendarView)
+                .range(startDate, endDate)
+                .datesNumberOnScreen(4)
+                .build();
+        horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
+            @Override
+            public void onDateSelected(Calendar date, int position) {
+                //do something
+            }
+        });
 
         Calendar c = Calendar.getInstance();
         mesText.setText(simple.format(c.getTime()));
