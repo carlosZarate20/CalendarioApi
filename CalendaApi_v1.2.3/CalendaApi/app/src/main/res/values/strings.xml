@@ -26,4 +26,5 @@
     <string name="time_22pm">22:00</string>
     <string name="time_23pm">23:00</string>
     <string name="time_24pm">24:00</string>
+    <string name="descripcionTitle">Descripcion</string>
 </resources>

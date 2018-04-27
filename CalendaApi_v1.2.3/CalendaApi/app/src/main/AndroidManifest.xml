@@ -20,9 +20,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".activities.MainActivity" />
-        <activity android:name=".activities.LoginActivity">
-
-        </activity>
+        <activity android:name=".activities.LoginActivity"></activity>
         <activity android:name=".activities.InicioActivity" />
         <activity android:name=".activities.CalendarioActivity">
             <intent-filter>
@@ -31,8 +29,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".activities.DetailCalendarActivity"></activity>
+        <activity android:name=".activities.DetailCalendarActivity" />
+        <activity android:name=".DayViewActivity"></activity>
     </application>
 
 </manifest>
