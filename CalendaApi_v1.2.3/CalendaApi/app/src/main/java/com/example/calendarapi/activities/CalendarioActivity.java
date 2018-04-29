@@ -131,6 +131,8 @@ public class CalendarioActivity extends Activity implements EasyPermissions.Perm
                 getApplicationContext(), Arrays.asList(SCOPES))
                 .setBackOff(new ExponentialBackOff());
     }
+
+
     private void getResultsFromApi() {
         if (! isGooglePlayServicesAvailable()) {
             acquireGooglePlayServices();
@@ -166,8 +168,6 @@ public class CalendarioActivity extends Activity implements EasyPermissions.Perm
                     Manifest.permission.GET_ACCOUNTS);
         }
     }
-
-
 
     @Override
     protected void onActivityResult(
@@ -238,22 +238,6 @@ public class CalendarioActivity extends Activity implements EasyPermissions.Perm
         return (networkInfo != null && networkInfo.isConnected());
     }
 
-    /*private boolean isGooglePlayServicesAvailable() {
-        GoogleApiAvailability apiAvailability =
-                GoogleApiAvailability.getInstance();
-        final int connectionStatusCode =
-                apiAvailability.isGooglePlayServicesAvailable(this);
-        if (apiAvailability.isUserResolvableError(connectionStatusCode)) {
-            apiAvailability.getErrorDialog(
-                    CalendarioActivity.this,
-                    connectionStatusCode,
-                    REQUEST_GOOGLE_PLAY_SERVICES).show();
-            return false;
-        } else if (connectionStatusCode != ConnectionResult.SUCCESS ) {
-            return false;
-        }
-        return true;
-    }*/
     private boolean isGooglePlayServicesAvailable() {
         GoogleApiAvailability apiAvailability =
                 GoogleApiAvailability.getInstance();

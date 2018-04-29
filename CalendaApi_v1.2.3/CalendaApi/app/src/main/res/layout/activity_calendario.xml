@@ -60,10 +60,7 @@
                 android:paddingLeft="16dp"
                 />
 
-
-
         </LinearLayout>
-
 
     </RelativeLayout>
     <ScrollView
@@ -292,7 +289,10 @@
                     android:textColor="#FFFFFF">
                 </ListView>
 
+
             </RelativeLayout>
+
+
 
         </LinearLayout>
     </ScrollView>

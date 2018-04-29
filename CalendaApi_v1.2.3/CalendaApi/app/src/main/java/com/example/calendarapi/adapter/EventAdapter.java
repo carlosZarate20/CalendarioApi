@@ -50,7 +50,7 @@ public class EventAdapter extends ArrayAdapter<Event>{
         View v= LayoutInflater.from(context).inflate(layoutId, null);
         TextView txt_event= (TextView) v.findViewById(R.id.event);
         //TextView txt_date= (TextView) v.findViewById(R.id.date);
-        TextView txt_time= (TextView)v.findViewById(R.id.time);
+        //TextView txt_time= (TextView)v.findViewById(R.id.time);
 
         Calendar cal=Calendar.getInstance();
         DateTime dt=e.getStart().getDateTime();
@@ -60,7 +60,7 @@ public class EventAdapter extends ArrayAdapter<Event>{
 
         txt_event.setText(e.getSummary());
         //txt_date.setText(simple.format(cal.getTime()));
-        txt_time.setText(simple2.format(cal.getTime()));
+        //txt_time.setText(simple2.format(cal.getTime()));
 
         return v;
     }
