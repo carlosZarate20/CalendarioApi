@@ -81,7 +81,6 @@ public class CalendarioActivity extends Activity implements EasyPermissions.Perm
         diaSemana = (TextView) findViewById(R.id.textWeak);
         fecha = (TextView) findViewById(R.id.textFecha);
 
-
         /* starts before 1 month from now */
         Calendar startDate = Calendar.getInstance();
         startDate.add(Calendar.MONTH, -1);
@@ -129,10 +128,9 @@ public class CalendarioActivity extends Activity implements EasyPermissions.Perm
 
         login = GoogleAccountCredential.usingOAuth2(
                 getApplicationContext(), Arrays.asList(SCOPES))
-                .setBackOff(new ExponentialBackOff());
+                .setBackOff(new ExponentialBackOff())
+                .setSelectedAccountName("zaratec31@gmail.com");
     }
-
-
     private void getResultsFromApi() {
         if (! isGooglePlayServicesAvailable()) {
             acquireGooglePlayServices();
@@ -151,7 +149,7 @@ public class CalendarioActivity extends Activity implements EasyPermissions.Perm
             String accountName = getPreferences(Context.MODE_PRIVATE)
                     .getString(PREF_ACCOUNT_NAME, null);
             if (accountName != null) {
-                login.setSelectedAccountName(accountName);
+                login.setSelectedAccountName("zaratec31@gmail.com");
                 getResultsFromApi();
             } else {
                 // Start a dialog from which the user can choose an account
@@ -189,9 +187,9 @@ public class CalendarioActivity extends Activity implements EasyPermissions.Perm
                         SharedPreferences settings =
                                 getPreferences(Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = settings.edit();
-                        editor.putString(PREF_ACCOUNT_NAME, accountName);
+                        editor.putString(PREF_ACCOUNT_NAME, "zaratec31@gmail.com");
                         editor.apply();
-                        login.setSelectedAccountName(accountName);
+                        login.setSelectedAccountName("zaratec31@gmail.com");
                         getResultsFromApi();
                     }
 
@@ -203,24 +201,24 @@ public class CalendarioActivity extends Activity implements EasyPermissions.Perm
                 }
                 break;
         }
-
-        //super.onActivityResult(requestCode, resultCode, data);
     }
     @Override
     protected void onResume() {
         super.onResume();
         if (isGooglePlayServicesAvailable()) {
             getResultsFromApi();
-            if (login.getSelectedAccountName() == null) {
+            if (isDeviceOnline()) {
+                new CalendarQueryTask(login).execute();
+            }
+            /*if (login.getSelectedAccountName() == null) {
                 startActivityForResult(login.newChooseAccountIntent(), REQUEST_ACCOUNT_PICKER);
             } else {
                 if (isDeviceOnline()) {
                     new CalendarQueryTask(login).execute();
                 }
-            }
+            }*/
         }
     }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
@@ -267,15 +265,10 @@ public class CalendarioActivity extends Activity implements EasyPermissions.Perm
 
     @Override
     public void onPermissionsGranted(int requestCode, List<String> perms) {
-
     }
-
     @Override
     public void onPermissionsDenied(int requestCode, List<String> perms) {
-
     }
-
-
     private class CalendarQueryTask extends AsyncTask<Void, Void, List<Event>> {
         private com.google.api.services.calendar.Calendar mService = null;
         private ProgressDialog progress=null;
