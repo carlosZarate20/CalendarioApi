@@ -9,6 +9,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -89,9 +90,22 @@ public class CalendarioActivity extends Activity implements EasyPermissions.Perm
         Calendar endDate = Calendar.getInstance();
         endDate.add(Calendar.MONTH, 1);
 
+        // Default Date set to Today.
+        final Calendar defaultSelectedDate = Calendar.getInstance();
+
         HorizontalCalendar horizontalCalendar = new HorizontalCalendar.Builder(this, R.id.calendarView)
                 .range(startDate, endDate)
-                .datesNumberOnScreen(4)
+                .datesNumberOnScreen(3)
+                .configure()
+                .formatTopText("MMM")
+                .formatMiddleText("dd")
+                .formatBottomText("EEE")
+                .showTopText(true)
+                .showBottomText(true)
+                .textColor(Color.LTGRAY, Color.WHITE)
+                .colorTextMiddle(Color.LTGRAY, Color.parseColor("#ffd54f"))
+                .end()
+                .defaultSelectedDate(defaultSelectedDate)
                 .build();
         horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
             @Override
@@ -184,15 +198,13 @@ public class CalendarioActivity extends Activity implements EasyPermissions.Perm
                         data.getExtras() != null) {
                     String accountName = data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
                     if (accountName != null) {
-                        SharedPreferences settings =
-                                getPreferences(Context.MODE_PRIVATE);
+                        SharedPreferences settings = getPreferences(Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = settings.edit();
                         editor.putString(PREF_ACCOUNT_NAME, "zaratec31@gmail.com");
                         editor.apply();
                         login.setSelectedAccountName("zaratec31@gmail.com");
                         getResultsFromApi();
                     }
-
                 }
                 break;
             case REQUEST_AUTHORIZATION:
@@ -206,8 +218,8 @@ public class CalendarioActivity extends Activity implements EasyPermissions.Perm
     protected void onResume() {
         super.onResume();
         if (isGooglePlayServicesAvailable()) {
-            getResultsFromApi();
-            if (isDeviceOnline()) {
+            //getResultsFromApi();
+            if (isDeviceOnline() || login.getSelectedAccountName().equals("zaratec31@gmail.com")) {
                 new CalendarQueryTask(login).execute();
             }
             /*if (login.getSelectedAccountName() == null) {
@@ -219,7 +231,6 @@ public class CalendarioActivity extends Activity implements EasyPermissions.Perm
             }*/
         }
     }
-
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String[] permissions,
@@ -297,15 +308,11 @@ public class CalendarioActivity extends Activity implements EasyPermissions.Perm
                 return null;
             }
         }
-
-
-
         @Override
         protected void onPreExecute() {
             progress=ProgressDialog.show(CalendarioActivity.this,"Google Calendar", "Conexion en Progreso...",true);
             progress.show();
         }
-
         @Override
         protected void onPostExecute(List<Event> output) {
             if (progress!=null)
