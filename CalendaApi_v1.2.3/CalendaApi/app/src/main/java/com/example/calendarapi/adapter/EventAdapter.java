@@ -58,6 +58,7 @@ public class EventAdapter extends ArrayAdapter<Event>{
             dt=e.getStart().getDate();
         cal.setTimeInMillis(dt.getValue());
 
+
         txt_event.setText(e.getSummary());
         //txt_date.setText(simple.format(cal.getTime()));
         //txt_time.setText(simple2.format(cal.getTime()));

@@ -70,6 +70,7 @@ public class CalendarioActivity extends Activity implements EasyPermissions.Perm
     private SimpleDateFormat simple=new SimpleDateFormat("MMMM");
     private SimpleDateFormat simple2=new SimpleDateFormat("EEE");
     private SimpleDateFormat simple3=new SimpleDateFormat("d");
+    private SimpleDateFormat simple4=new SimpleDateFormat("h:mm a");
 
     private EventAdapter adapter;
 
@@ -134,7 +135,7 @@ public class CalendarioActivity extends Activity implements EasyPermissions.Perm
                 intent.putExtra("summary",evento.getSummary());
                 intent.putExtra("location",evento.getLocation());
                 intent.putExtra("description",evento.getDescription());
-                intent.putExtra("startTime",evento.getStart().getDateTime().toString());
+                intent.putExtra("startTime",evento.getStart().getDateTime());
                 startActivity(intent);
             }
         });

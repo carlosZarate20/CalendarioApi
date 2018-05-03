@@ -11,6 +11,8 @@ import com.example.calendarapi.R;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import static okhttp3.internal.http.HttpDate.parse;
+
 public class DetailCalendarActivity extends AppCompatActivity {
 
     TextView detail,location,evento,hora,id;
@@ -31,7 +33,7 @@ public class DetailCalendarActivity extends AppCompatActivity {
         evento.setText(getIntent().getStringExtra("summary"));
         location.setText(getIntent().getStringExtra("location"));
         detail.setText(getIntent().getStringExtra("description"));
-        hora.setText(getIntent().getStringExtra("startTime"));
+        hora.setText(getIntent().getStringExtra("startTime").toString());
     }
 
     @Override
