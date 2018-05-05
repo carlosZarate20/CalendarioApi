@@ -30,7 +30,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.DetailCalendarActivity" />
-        <activity android:name=".DayViewActivity"></activity>
     </application>
 
 </manifest>

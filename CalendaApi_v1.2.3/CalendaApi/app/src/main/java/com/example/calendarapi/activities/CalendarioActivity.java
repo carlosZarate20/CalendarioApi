@@ -54,9 +54,9 @@ import pub.devrel.easypermissions.EasyPermissions;
 public class CalendarioActivity extends Activity implements EasyPermissions.PermissionCallbacks {
 
     ListView listView;
-    List<Event> eventosItems;
     TextView mesText, diaSemana,fecha;
 
+    //Para pedir todos los permisos
     static final int REQUEST_ACCOUNT_PICKER = 1000;
     static final int REQUEST_AUTHORIZATION = 1001;
     static final int REQUEST_GOOGLE_PLAY_SERVICES = 1002;
@@ -65,8 +65,8 @@ public class CalendarioActivity extends Activity implements EasyPermissions.Perm
 
     GoogleAccountCredential login;
 
-    private static final String PREF_ACCOUNT_NAME = "accountName";
-    private static final String[] SCOPES = { CalendarScopes.CALENDAR_READONLY };
+    private static final String PREF_ACCOUNT_NAME = "accountName"; //El estado de cuenta que se coloca
+    private static final String[] SCOPES = { CalendarScopes.CALENDAR_READONLY }; //Para que lea los calendarios
     private SimpleDateFormat simple=new SimpleDateFormat("MMMM");
     private SimpleDateFormat simple2=new SimpleDateFormat("EEE");
     private SimpleDateFormat simple3=new SimpleDateFormat("d");
@@ -94,6 +94,7 @@ public class CalendarioActivity extends Activity implements EasyPermissions.Perm
         // Default Date set to Today.
         final Calendar defaultSelectedDate = Calendar.getInstance();
 
+        //Modificar los detalles del horizontal calendar
         HorizontalCalendar horizontalCalendar = new HorizontalCalendar.Builder(this, R.id.calendarView)
                 .range(startDate, endDate)
                 .datesNumberOnScreen(3)
@@ -115,6 +116,7 @@ public class CalendarioActivity extends Activity implements EasyPermissions.Perm
             }
         });
 
+        //OIbtengo el dia, mes y fecha actual
         Calendar c = Calendar.getInstance();
         mesText.setText(simple.format(c.getTime()));
         diaSemana.setText(simple2.format(c.getTime()));
@@ -126,6 +128,7 @@ public class CalendarioActivity extends Activity implements EasyPermissions.Perm
         listView.setAdapter(adapter);
         //setListAdapter(adapter);
         //getListView().setDividerHeight(10);
+        //Momento de dar click para obtener el detalle de cada evento, coloco lo que necesito
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -141,11 +144,14 @@ public class CalendarioActivity extends Activity implements EasyPermissions.Perm
         });
 
 
+        //Inicializa las credenciales y los servicios
         login = GoogleAccountCredential.usingOAuth2(
                 getApplicationContext(), Arrays.asList(SCOPES))
                 .setBackOff(new ExponentialBackOff())
                 .setSelectedAccountName("zaratec31@gmail.com");
     }
+    //Llama a la pai y verifica que todo este bien
+
     private void getResultsFromApi() {
         if (! isGooglePlayServicesAvailable()) {
             acquireGooglePlayServices();
@@ -157,6 +163,8 @@ public class CalendarioActivity extends Activity implements EasyPermissions.Perm
             new CalendarQueryTask(login).execute();
         }
     }
+
+    //Valida los permisos con las credenciales de la api
     @AfterPermissionGranted(REQUEST_PERMISSION_GET_ACCOUNTS)
     private void chooseAccount() {
         if (EasyPermissions.hasPermissions(
@@ -182,6 +190,7 @@ public class CalendarioActivity extends Activity implements EasyPermissions.Perm
         }
     }
 
+    //Se llama cuando la actividad es lanzada
     @Override
     protected void onActivityResult(
             int requestCode, int resultCode, Intent data) {
@@ -215,12 +224,13 @@ public class CalendarioActivity extends Activity implements EasyPermissions.Perm
                 break;
         }
     }
+    //Aqui llamamos lo que necesitaremos al momento de lanzar la app
     @Override
     protected void onResume() {
         super.onResume();
-        if (isGooglePlayServicesAvailable()) {
+        if (isGooglePlayServicesAvailable()) { //Verifica si el servicio esta disponible
             //getResultsFromApi();
-            if (isDeviceOnline() || login.getSelectedAccountName().equals("zaratec31@gmail.com")) {
+            if (isDeviceOnline() || login.getSelectedAccountName().equals("zaratec31@gmail.com")) { //Ya no pido que selecione cuenta, defrente coloco la cuenta que usare
                 new CalendarQueryTask(login).execute();
             }
             /*if (login.getSelectedAccountName() == null) {
@@ -241,6 +251,7 @@ public class CalendarioActivity extends Activity implements EasyPermissions.Perm
                 requestCode, permissions, grantResults, this);
     }
 
+    //Verifica que tengas una conexion a internet
     private boolean isDeviceOnline() {
         ConnectivityManager connMgr =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -293,6 +304,7 @@ public class CalendarioActivity extends Activity implements EasyPermissions.Perm
                     .build();
         }
 
+        //Lista los evnetos en este caso 10 primeros del calendario primario
         @Override
         protected List<Event> doInBackground(Void... params) {
             try {
