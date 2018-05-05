@@ -95,7 +95,7 @@ public class CalendarioActivity extends Activity implements EasyPermissions.Perm
         final Calendar defaultSelectedDate = Calendar.getInstance();
 
         //Modificar los detalles del horizontal calendar
-        HorizontalCalendar horizontalCalendar = new HorizontalCalendar.Builder(this, R.id.calendarView)
+        /*HorizontalCalendar horizontalCalendar = new HorizontalCalendar.Builder(this, R.id.calendarView)
                 .range(startDate, endDate)
                 .datesNumberOnScreen(3)
                 .configure()
@@ -115,6 +115,18 @@ public class CalendarioActivity extends Activity implements EasyPermissions.Perm
                 //do something
             }
         });
+        <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/layout_background_apps">
+        <devs.mulham.horizontalcalendar.HorizontalCalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#000000"
+            app:textColorSelected="#FFFF"/>
+
+    </RelativeLayout>*/
 
         //OIbtengo el dia, mes y fecha actual
         Calendar c = Calendar.getInstance();
